@@ -7,8 +7,8 @@ import LeftPanel from './components/LeftPanel';
 function App() {
 
   const [currentWeather, setCurrentWeather] = useState<any>(undefined);
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState(40.484390);
+  const [longitude, setLongitude] = useState(-3.368802);
 
     useEffect(() => {
       if (navigator.geolocation) {

@@ -69,3 +69,9 @@ font-style: normal;
 font-weight: 600;
 line-height: normal;
 }
+
+@media (max-width: 767px) {
+  .App-left, .App-right {
+    width: 100%;
+  }
+}
