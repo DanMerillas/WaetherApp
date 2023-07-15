@@ -1,28 +1,43 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-import raining from './images/Shower.png';
+import LeftPanel from './components/LeftPanel';
+
 
 function App() {
+
+  const [currentWeather, setCurrentWeather] = useState<any>(undefined);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+
+    useEffect(() => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+        
+    }, []);
+
+    useEffect(() => { 
+      if(latitude === 0 || longitude === 0) return;
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=es&units=metric&appid=bd5e378503939ddaee76f12ad7a97608`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setCurrentWeather(data);
+            })
+    }, [latitude, longitude]);
+
   return (
     <div className="App">
-      <article className="App-left">
-        <div className='App-weather'>
-          <img src={raining} alt='weather'/>
-        </div>
-        <div className='App-weather App-number'>
-          15º
-        </div>
-        <div className='App-weather App-status'>
-          Shower
-        </div>
-        <div className='App-weather'>
-          <div className='App-weather-date'>Today</div>
-          <div className='App-weather-date'>Fri, 5 Jun</div>
-        </div>
-        <div className='App-weather App-location'>
-          Alcalá de Henares
-        </div>
-      </article>
+      <LeftPanel currentWeather={currentWeather}/>
       <article className="App-right">
       </article>
     </div>
