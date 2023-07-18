@@ -16,6 +16,7 @@ export default function LeftPanel(props: { currentWeather: any }) {
         {props.currentWeather ? <article className="App-left">
             <div className='App-weather'>
                 <img src={props.currentWeather?.weather && props.currentWeather.weather.length > 0 ? weatherImage[props.currentWeather.weather[0].main] : ''} alt='weather' />
+                {props.currentWeather.weather[0].main}
             </div>
             <div className='App-weather App-number'>
                 {Math.round(props.currentWeather.main.temp)}º
