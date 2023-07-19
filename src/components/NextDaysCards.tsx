@@ -16,8 +16,8 @@ export default function NextDaysCards(props: { weather: any }) {
                                     <div>
                                         <img className='App-weather-small-image' src={weatherImage(day.weather[0].main)} alt='weather' />
                                     </div>
-                                    <div>{day.temp.min}</div>
-                                    <div>{day.temp.max}</div>
+                                    <div>{day.temp.min} Cº</div>
+                                    <div>{day.temp.max} Cº</div>
                                 </div>
                             }
                             else {
