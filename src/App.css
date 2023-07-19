@@ -13,6 +13,7 @@
 }
 
 .App-right {
+  
   width: 80%;
   height: 1023px;
   flex-shrink: 0;
@@ -70,8 +71,47 @@ font-weight: 600;
 line-height: normal;
 }
 
+.App-weather-days{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+.App-weather-day,.App-weather-hightlights{
+  color: #88869D;
+  width: 120px;
+  height: 177px;
+  text-align: center; 
+  margin-top: 100px;
+  border: #A09FB1 solid 1px;
+  background: #1E213A; 
+  margin-left: 2%;
+  }
+
+  .App-weather-hightlights{
+    margin-top: 60px;
+    width: 350px;
+    
+    }
+
+  .App-weather-title{
+    margin-top: 60px;
+    margin-left: 27%;
+    color:white;
+  }
+
+  .App-weather-small-image{
+    width: 75%;
+
+  }
+
 @media (max-width: 767px) {
   .App-left, .App-right {
     width: 100%;
+  }
+
+  .App-right {
+
+    height: 1710px;
   }
 }

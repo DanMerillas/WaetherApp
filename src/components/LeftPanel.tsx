@@ -1,25 +1,20 @@
-import raining from './../images/Shower.png'
-import clear from './../images/Clear.png'
-import snow from './../images/Snow.png'
+import weatherImage from "../commons/weatherImage";
+
 
 export default function LeftPanel(props: { currentWeather: any }) {
 
     const currentDate = new Date();
-    const weatherImage:any = {
-        'Clear': clear,
-        'Rain': raining,
-        'Snow': snow
-    }
+    
 
     return (
         <>
         {props.currentWeather ? <article className="App-left">
             <div className='App-weather'>
-                <img src={props.currentWeather?.weather && props.currentWeather.weather.length > 0 ? weatherImage[props.currentWeather.weather[0].main] : ''} alt='weather' />
+                <img src={props.currentWeather?.weather && props.currentWeather.weather.length > 0 ? weatherImage(props.currentWeather.weather[0].main) : ''} alt='weather' />
                 {props.currentWeather.weather[0].main}
             </div>
             <div className='App-weather App-number'>
-                {Math.round(props.currentWeather.main.temp)}º
+                {Math.round(props.currentWeather.temp)}º
             </div>
             <div className='App-weather App-status'>
                 {props.currentWeather?.weather && props.currentWeather.weather.length > 0 ? props.currentWeather.weather[0].description.replace(/^\w/, (c: string) => c.toUpperCase()):''}
