@@ -1,7 +1,7 @@
 import weatherImage from "../commons/weatherImage";
 
 
-export default function LeftPanel(props: { currentWeather: any }) {
+export default function LeftPanel(props: { currentWeather: any; location:string }) {
 
     const currentDate = new Date();
     
@@ -24,7 +24,7 @@ export default function LeftPanel(props: { currentWeather: any }) {
                 <div className='App-weather-date'>{currentDate.toLocaleDateString()}</div>
             </div>
             <div className='App-weather App-location'>
-                {props.currentWeather.name}
+                {props.location}
             </div>
         </article> : ''}
         </>
