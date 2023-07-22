@@ -2,8 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
 import LeftPanel from './components/LeftPanel';
-import weatherImage from './commons/weatherImage';
 import RightPanel from './components/RightPanel';
+import { getLocationName, getWeatherData } from './services/weatherApi';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   const [latitude, setLatitude] = useState(40.484390);
   const [longitude, setLongitude] = useState(-3.368802);
 
-  useEffect(() => {
+  const enableLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -25,33 +25,21 @@ function App() {
         }
       );
     }
+  }
 
-  }, []);
 
   useEffect(() => {
     if (latitude === 0 || longitude === 0) return;
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=es&units=metric&appid=bd5e378503939ddaee76f12ad7a97608`;
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        setCurrentWeather(data);
-      })
+    getWeatherData(latitude, longitude, setCurrentWeather);
 
-      const urlLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=es&units=metric&appid=bd5e378503939ddaee76f12ad7a97608`;
-    fetch(urlLocation)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        setLocation(data.name);
-      })
+    getLocationName(latitude, longitude, setLocation);
   }, [latitude, longitude]);
 
   return (
     <div className="App">
       {currentWeather ?
         <>
-          <LeftPanel currentWeather={currentWeather?.current} location={location}/>
+          <LeftPanel currentWeather={currentWeather?.current} location={location} enableLocation={enableLocation}/>
           <RightPanel weather={currentWeather} />
         </>
         : ''}
@@ -62,3 +50,5 @@ function App() {
 }
 
 export default App;
+
+
