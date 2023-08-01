@@ -19,6 +19,7 @@
   flex-shrink: 0;
   background: #100E1D;
   float: right;
+  overflow: auto;
 }
 
 .App-weather {
@@ -53,15 +54,16 @@ img {
 }
 
 .App-weather-date {
-  
-margin-top: 10px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: #E7E7EB;
-text-align: center;
-font-family: Raleway;
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: normal; 
+  text-align: center;
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .App-location {
@@ -83,9 +85,10 @@ line-height: normal;
 .App-weather-hightlights {
   color: #88869D;
   width: 120px;
-  height: 177px;
+  height: 100%;
   text-align: center;
   margin-top: 100px;
+  margin-bottom: 10px;
   border: #A09FB1 solid 1px;
   background: #1E213A;
   margin-left: 2%;
@@ -157,14 +160,14 @@ line-height: normal;
   background: #E7E7EB;
 }
 
-.percent{
+.percent {
   position: absolute;
-      top: 0;
-      left: 0;
-      background-color: yellow;
+  top: 0;
+  left: 0;
+  background-color: yellow;
 }
 
-.App-weather-location-control{
+.App-weather-location-control {
   text-align: right;
   margin-top: 19px;
   cursor: pointer;
