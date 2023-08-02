@@ -9,6 +9,7 @@ import { getLocationName, getWeatherData } from './services/weatherApi';
 function App() {
 
   const [currentWeather, setCurrentWeather] = useState<any>(undefined);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [location, setLocation] = useState<any>('');
   const [latitude, setLatitude] = useState(40.484390);
   const [longitude, setLongitude] = useState(-3.368802);
@@ -30,19 +31,20 @@ function App() {
 
   useEffect(() => {
     if (latitude === 0 || longitude === 0) return;
-    getWeatherData(latitude, longitude, setCurrentWeather);
+    getWeatherData(latitude, longitude, setCurrentWeather, setErrorMessage);
 
-    getLocationName(latitude, longitude, setLocation);
+    getLocationName(latitude, longitude, setLocation, setErrorMessage);
   }, [latitude, longitude]);
 
   return (
     <div className="App">
       {currentWeather ?
         <>
+        {errorMessage}
           <LeftPanel currentWeather={currentWeather?.current} location={location} enableLocation={enableLocation}/>
           <RightPanel weather={currentWeather} />
         </>
-        : ''}
+        : <div className="error">{errorMessage}</div>}
 
 
     </div>

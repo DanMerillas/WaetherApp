@@ -13,7 +13,7 @@ export default function TodayHightLightsPanel(props: { weather: any }) {
                     <div className="App-weather-hightlights-title">Wind status</div>
                     <div className="App-weather-hightlights-value">{props.weather?.current.wind_speed} <span className="App-weather-hightlights-unit">mph</span></div>
                     <div>
-                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg style={{transform:`rotate(${(-120 + props.weather?.current.wind_deg)}deg)`}} width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_1_98)">
                                 <path d="M8.01348 17.2203L9.61278 5.38071C9.70167 4.72534 10.5505 4.5087 10.9377 5.04729L13.4776 8.52307C13.603 8.68917 13.7882 8.79609 13.9948 8.8217L18.2749 9.28342C18.9312 9.35586 19.1717 10.1929 18.6486 10.5975L9.19484 17.9023C8.67811 18.3107 7.92459 17.8757 8.01348 17.2203Z" fill="#E7E7EB" />
                             </g>
