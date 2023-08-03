@@ -10,9 +10,19 @@ function App() {
 
   const [currentWeather, setCurrentWeather] = useState<any>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorLocationMessage, setErrorLocationMessage] = useState<string>('');
   const [location, setLocation] = useState<any>('');
   const [latitude, setLatitude] = useState(40.484390);
   const [longitude, setLongitude] = useState(-3.368802);
+
+
+  useEffect(() => {
+    if (latitude === 0 || longitude === 0) return;
+    getWeatherData(latitude, longitude, setCurrentWeather, setErrorMessage);
+
+    getLocationName(latitude, longitude, setLocation, setErrorLocationMessage);
+  }, [latitude, longitude]);
+
 
   const enableLocation = () => {
     if (navigator.geolocation) {
@@ -29,22 +39,27 @@ function App() {
   }
 
 
-  useEffect(() => {
-    if (latitude === 0 || longitude === 0) return;
-    getWeatherData(latitude, longitude, setCurrentWeather, setErrorMessage);
+  const handlerSearch = (city: string) => {
+    getWeatherData(0, 0, setCurrentWeather, setErrorMessage, city);
+    getLocationName(0, 0, setLocation, setErrorLocationMessage, city);
 
-    getLocationName(latitude, longitude, setLocation, setErrorMessage);
-  }, [latitude, longitude]);
+    if (errorLocationMessage === ''){
+      alert('City not found')
+    }
+  }
 
   return (
     <div className="App">
       {currentWeather ?
         <>
-        {errorMessage}
-          <LeftPanel currentWeather={currentWeather?.current} location={location} enableLocation={enableLocation}/>
+          {errorMessage}
+          <LeftPanel currentWeather={currentWeather?.current} location={location.name} enableLocation={enableLocation} hanlerSearch={handlerSearch} />
           <RightPanel weather={currentWeather} />
         </>
-        : <div className="error">{errorMessage}</div>}
+        : <>
+          <LeftPanel currentWeather={currentWeather ? currentWeather.current : location} location={location.name} enableLocation={enableLocation} hanlerSearch={handlerSearch} />
+          <div className="error">{errorMessage}</div>
+        </>}
 
 
     </div>

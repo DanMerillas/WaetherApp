@@ -1,4 +1,4 @@
-import weatherImage from "../commons/weatherImage";
+
 import NextDaysCards from "./NextDaysCards";
 import TodayHightLightsPanel from "./TodayHightLightsPanel";
 
