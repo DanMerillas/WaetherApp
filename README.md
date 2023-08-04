@@ -78,6 +78,6 @@ $ npm start
 
 ## Contact
 
-- Website [your-website.com]([https://{your-web-site-link}](https://daniel-merillas.netlify.app/))
-- GitHub [@your-username](https://{github.com/DanMerillas})
-- Twitter [@your-twitter](https://{twitter.com/M3r1x1})
+- Website [My-website.com][[([https://{your-web-site-link}](https://daniel-merillas.netlify.app/))](https://daniel-merillas.netlify.app/)](https://daniel-merillas.netlify.app)
+- GitHub [@DanMerillas](https://github.com/DanMerillas)
+- Twitter [@M3r1x1](https://twitter.com/M3r1x1)
