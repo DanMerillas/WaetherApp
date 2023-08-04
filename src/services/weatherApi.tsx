@@ -15,10 +15,10 @@ export async function getLocationName(latitude: number, longitude: number, city:
   
   export async function getWeatherData(latitude: number, longitude: number, city: string, unit:string) {
 
-    let url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&lang=en&units=${unit}&appid=${process.env.REACT_APP_WT_AP_KEY}`;
+    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=en&units=${unit}&appid=${process.env.REACT_APP_WT_AP_KEY}`;
 
     if(city){
-      url = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&lang=en&units=${unit}&appid=${process.env.REACT_APP_WT_AP_KEY}`;
+      url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=en&units=${unit}&appid=${process.env.REACT_APP_WT_AP_KEY}`;
     }
 
     const response = await fetch(url);

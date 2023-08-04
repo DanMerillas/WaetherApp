@@ -16,16 +16,17 @@ function App() {
   const [latitude, setLatitude] = useState(40.484390);
   const [longitude, setLongitude] = useState(-3.368802);
   const [unit, setUnit] = useState<string>('Metric');
+  const [searchCity, setSearchCity] = useState<string>('');
 
   useEffect(() => {
 
-    fetchData()
+    fetchData(searchCity)
 
   }, [latitude, longitude]);
 
   useEffect(() => {
 
-    fetchData()
+    fetchData(searchCity)
 
   }, [unit]);
 
@@ -39,6 +40,7 @@ function App() {
     }
     else {
       setCurrentWeather(resultWeather);
+      console.log(resultWeather);
     }
 
 
@@ -48,7 +50,6 @@ function App() {
     }
     else {
       setLocation(resultLocationWeather);
-      console.log(resultLocationWeather);
     }
 
 
@@ -62,6 +63,7 @@ function App() {
         (position) => {
           setLatitude(position.coords.latitude);
           setLongitude(position.coords.longitude);
+          setSearchCity('');
         },
         (error) => {
           console.log(error);
@@ -73,7 +75,7 @@ function App() {
 
   const handlerSearch = (city: string) => {
     fetchData(city)
-
+    setSearchCity(city)
 
   }
 

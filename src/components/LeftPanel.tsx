@@ -61,8 +61,8 @@ export default function LeftPanel(props: { currentWeather: any; location: string
                     {props.currentWeather?.weather && props.currentWeather.weather.length > 0 ? props.currentWeather.weather[0].description.replace(/^\w/, (c: string) => c.toUpperCase()) : ''}
                 </div>
                 <div className='App-weather'>
-                    <div className='App-weather-date'>Today</div>
-                    <div className='App-weather-date'>{currentDate.toLocaleDateString()}</div>
+                    
+                    <div className='App-weather-date' style={{color:'#88869D'}}>{currentDate.toLocaleDateString()}</div>
                 </div>
                 <div className='App-weather App-location'>
                     {props.location}
