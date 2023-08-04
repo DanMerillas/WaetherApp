@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
@@ -11,17 +12,48 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState<any>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [errorLocationMessage, setErrorLocationMessage] = useState<string>('');
-  const [location, setLocation] = useState<any>('');
+  const [location, setLocation] = useState<any>(undefined);
   const [latitude, setLatitude] = useState(40.484390);
   const [longitude, setLongitude] = useState(-3.368802);
-
+  const [unit, setUnit] = useState<string>('Metric');
 
   useEffect(() => {
-    if (latitude === 0 || longitude === 0) return;
-    getWeatherData(latitude, longitude, setCurrentWeather, setErrorMessage);
 
-    getLocationName(latitude, longitude, setLocation, setErrorLocationMessage);
+    fetchData()
+
   }, [latitude, longitude]);
+
+  useEffect(() => {
+
+    fetchData()
+
+  }, [unit]);
+
+  const fetchData: any = async (city:any = undefined) => {
+    if (latitude === 0 || longitude === 0) return;
+
+    const resultWeather = await getWeatherData(latitude, longitude, city, unit);
+
+    if (resultWeather.cod && resultWeather.cod !== '200') {
+      setErrorMessage('Could not get weather information');
+    }
+    else {
+      setCurrentWeather(resultWeather);
+    }
+
+
+    const resultLocationWeather = await getLocationName(latitude, longitude, city, unit);
+    if (resultLocationWeather.cod && resultLocationWeather.cod !== 200) {
+      setErrorLocationMessage('Could not get weather information');
+    }
+    else {
+      setLocation(resultLocationWeather);
+      console.log(resultLocationWeather);
+    }
+
+
+  }
+
 
 
   const enableLocation = () => {
@@ -40,26 +72,22 @@ function App() {
 
 
   const handlerSearch = (city: string) => {
-    getWeatherData(0, 0, setCurrentWeather, setErrorMessage, city);
-    getLocationName(0, 0, setLocation, setErrorLocationMessage, city);
+    fetchData(city)
 
-    if (errorLocationMessage === ''){
-      alert('City not found')
-    }
+
   }
 
   return (
     <div className="App">
-      {currentWeather ?
+      {currentWeather && location ?
         <>
-          {errorMessage}
-          <LeftPanel currentWeather={currentWeather?.current} location={location.name} enableLocation={enableLocation} hanlerSearch={handlerSearch} />
-          <RightPanel weather={currentWeather} />
+
+          <LeftPanel currentWeather={location} location={location.name} enableLocation={enableLocation} hanlerSearch={handlerSearch} unit={unit}/>
+          <RightPanel weather={currentWeather} currentWeather={location} setUnit={setUnit} unit={unit}/>
         </>
-        : <>
-          <LeftPanel currentWeather={currentWeather ? currentWeather.current : location} location={location.name} enableLocation={enableLocation} hanlerSearch={handlerSearch} />
-          <div className="error">{errorMessage}</div>
-        </>}
+        : errorLocationMessage !== '' ? 
+          <div className="error">{errorMessage}</div> : ''
+        }
 
 
     </div>
