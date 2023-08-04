@@ -40,7 +40,6 @@ function App() {
     }
     else {
       setCurrentWeather(resultWeather);
-      console.log(resultWeather);
     }
 
 

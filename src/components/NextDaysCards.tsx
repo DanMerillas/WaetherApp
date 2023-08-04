@@ -3,7 +3,6 @@ import weatherImage from "../commons/weatherImage";
 
 export default function NextDaysCards(props: { weather: any; unit: string }) {
 
-    let daysCounter = 0;
     let min_temp = 0
     let max_temp = 0
     let newDay = true;
@@ -28,8 +27,7 @@ export default function NextDaysCards(props: { weather: any; unit: string }) {
                         if(max_temp < day.main.temp_max.toFixed(0))
                             max_temp = day.main.temp_max.toFixed(0);
                         
-                        if (day.dt_txt.indexOf('00:00:00') !== -1) {
-                            daysCounter++;
+                        if (day.dt_txt.indexOf('21:00:00') !== -1) {
                             newDay = true;
 
                             return <div className='App-weather-day' key={day.dt}>
