@@ -78,6 +78,6 @@ $ npm start
 
 ## Contact
 
-- Website [My-website.com](https://daniel-merillas.netlify.app/)
+- Website [daniel-merillas.netlify.app](https://daniel-merillas.netlify.app/)
 - GitHub [@DanMerillas](https://github.com/DanMerillas)
 - Twitter [@M3r1x1](https://twitter.com/M3r1x1)
